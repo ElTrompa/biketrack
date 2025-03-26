@@ -1,0 +1,56 @@
+-- Crear base de datos
+CREATE DATABASE BikeTrackDB;
+
+-- Seleccionar la base de datos
+USE BikeTrackDB;
+
+-- Tabla Ciclistas
+CREATE TABLE Ciclistas (
+    id_ciclista INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    edad INT,
+    peso DECIMAL(5,2),
+    categoria VARCHAR(50)
+);
+
+-- Tabla Entrenamientos
+CREATE TABLE Entrenamientos (
+    id_entrenamiento INT AUTO_INCREMENT PRIMARY KEY,
+    id_ciclista INT,
+    fecha DATE,
+    distancia DECIMAL(5,2),
+    tiempo TIME,
+    tipo_entrenamiento VARCHAR(50),
+    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+);
+
+-- Tabla Rutas
+CREATE TABLE Rutas (
+    id_ruta INT AUTO_INCREMENT PRIMARY KEY,
+    id_ciclista INT,
+    nombre VARCHAR(100),
+    distancia DECIMAL(5,2),
+    dificultad VARCHAR(50),
+    ubicacion VARCHAR(100),
+    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+);
+
+-- Tabla Equipamiento
+CREATE TABLE Equipamiento (
+    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
+    id_ciclista INT,
+    tipo VARCHAR(50),
+    marca VARCHAR(50),
+    modelo VARCHAR(50),
+    estado VARCHAR(50),
+    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+);
+
+-- Tabla Usuarios (para autenticación)
+CREATE TABLE Usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id_ciclista INT,
+    usuario VARCHAR(12) UNIQUE,
+    password VARCHAR(12),
+    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+);
