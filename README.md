@@ -71,6 +71,13 @@ modelo (VARCHAR)
 estado (VARCHAR)
 ```
 
+### 📌 Usuarios 🔑
+```sql
+id_usuario (INT, PK, AUTO_INCREMENT)
+id_ciclista (INT, FK)
+usuario (VARCHAR UNIQUE)
+password (VARCHAR)
+```
 ## 5️⃣ Tecnologías a Utilizar 🖥️
 ✅ **Java (Swing o JavaFX)** - Para la interfaz gráfica.  
 ✅ **MySQL** - Para la base de datos.  
