@@ -10,7 +10,9 @@ CREATE TABLE Ciclistas (
     nombre VARCHAR(100),
     edad INT,
     peso DECIMAL(5,2),
-    categoria VARCHAR(50)
+    categoria VARCHAR(50),
+    carga int,
+    estado enum("sobreentrenamiento", "mantenimiento", "perdida", "pico de forma",  "recuperacion")
 );
 
 -- Tabla Entrenamientos
