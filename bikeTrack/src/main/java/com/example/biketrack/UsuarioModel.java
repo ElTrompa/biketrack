@@ -1,89 +1,77 @@
 package com.example.biketrack;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UsuarioModel extends DBUtil{
-
-    // Método para obtener los usuarios
-    public ArrayList<Usuario> getUsuarios() {
-        ArrayList<Usuario> resultado = new ArrayList<>();
-        try {
-            PreparedStatement ps = this.getConexion().prepareStatement("SELECT id_usuario, password, usuario, id_ciclista FROM Usuario");
+    public ArrayList <Usuario> getUsuarios(){
+        ArrayList <Usuario> resultado = new ArrayList();
+        try{
+            PreparedStatement ps = this.getConexion().prepareStatement("carga, categoria, edad, estado, nombre, password, peso, usuario");
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                String id_usuario = rs.getString("id_usuario");
-                String password = rs.getString("password");
+            while (rs.next()){
                 String usuario = rs.getString("usuario");
-                String id_ciclista = rs.getString("id_ciclista");
+                String password = rs.getString("password");
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+                double peso = rs.getDouble("peso");
+                String categoria = rs.getString("categoria");
+                int carga = rs.getInt("carga");
+                String estado = rs.getString("estado");
 
-                Usuario u = new Usuario(id_usuario, password, usuario, id_ciclista);
+                Usuario u = new Usuario(carga, categoria, edad, estado, nombre, password, peso, usuario);
                 resultado.add(u);
             }
-
-        } catch (SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return resultado;
     }
 
-    // Método para insertar un nuevo usuario
-    public boolean insert(Usuario u) {
+    public boolean inertar(Usuario u) {
         boolean resultado = false;
 
         try {
-            String sql = "INSERT INTO usuario (id_usuario, password, usuario, id_ciclista) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO usuario (carga, categoria, edad, estado, nombre, password, peso, usuario) VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = this.getConexion().prepareStatement(sql);
-            ps.setString(1, u.getId_usuario());
+            ps.setString(1, u.getUsuario());
             ps.setString(2, u.getPassword());
-            ps.setString(3, u.getUsuario());
-            ps.setString(4, u.getId_ciclista());
-            resultado = ps.execute();
-        } catch (SQLException e) {
+            ps.setString(3, u.getNombre());
+            ps.setInt(4, u.getEdad());
+            ps.setDouble(5, u.getPeso());
+            ps.setString(6, u.getCategoria());
+            ps.setInt(7, u.getCarga());
+            ps.setString(8, u.getEstado());
+
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return resultado;
     }
 
-    // Método para actualizar el estado de estado
-    public int actualizarEstadoDeForma(String id_ciclista, int carga, String estado) {
+    public int actualizarEstado(String usuario) {
         int resultado = 0;
+
         try {
-            String sql = "UPDATE Usuario SET estado, carga = true WHERE id_ciclista = ?";
+            String sql = "UPDATE usuario SET estado = ? WHERE estado = ?";
             PreparedStatement ps = this.getConexion().prepareStatement(sql);
-            ps.setString(1, id_ciclista);
+            ps.setString(1, usuario);
             resultado = ps.executeUpdate();
-        } catch (SQLException e) {
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return resultado;
     }
 
-    // Método para eliminar un usuario
     public int remove(Usuario u) {
         int resultado = 0;
         try {
-            String sql = "DELETE FROM usuario WHERE id_ciclista = ?";
+            String sql = "DELETE FROM Usuario WHERE usuario = ?";
             PreparedStatement ps = this.getConexion().prepareStatement(sql);
-            ps.setString(1, u.getId_ciclista());
-            resultado = ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultado;
-    }
-
-    // Método para eliminar un usuario por id_ciclista
-    public int remove(String dni) {
-        int resultado = 0;
-        try {
-            String sql = "DELETE FROM Usuario WHERE id_ciclista = ?";
-            PreparedStatement ps = this.getConexion().prepareStatement(sql);
-            ps.setString(1, dni);
+            ps.setString(1, u.getUsuario());
             resultado = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
