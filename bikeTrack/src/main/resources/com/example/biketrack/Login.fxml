@@ -8,22 +8,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.PasswordField?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.LoginController">
    <children>
       <Text fill="WHITE" layoutX="131.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="338.13671875">
          <font>
             <Font name="Arial Bold" size="52.0" />
          </font>
       </Text>
-      <TextField layoutX="320.0" layoutY="153.0" text="usuario" />
+      <TextField fx:id="usuarioField" layoutX="320.0" layoutY="153.0" text="usuario" />
       <Text fill="WHITE" layoutX="194.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario" wrappingWidth="52.7301025390625" />
-      <TextField layoutX="320.0" layoutY="200.0" text="contraseña" />
+      <PasswordField fx:id="passwordField" layoutX="320.0" layoutY="200.0" text="contraseña" />
       <Text fill="WHITE" layoutX="194.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="63.13006591796875" />
       <ImageView fitHeight="117.0" fitWidth="135.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: border;">
          <image>
             <Image url="@../../../../../../../logo_bikeTrack.png" />
          </image>
       </ImageView>
-      <Button layoutX="383.0" layoutY="249.0" mnemonicParsing="false" text="Iniciar Sesion" />
+      <Button onAction="#handleLogin" layoutX="383.0" layoutY="249.0" mnemonicParsing="false" text="Iniciar Sesion" />
    </children>
 </Pane>

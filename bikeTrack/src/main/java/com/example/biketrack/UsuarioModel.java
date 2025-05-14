@@ -1,5 +1,6 @@
 package com.example.biketrack;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -77,5 +78,44 @@ public class UsuarioModel extends DBUtil{
             e.printStackTrace();
         }
         return resultado;
+    }
+
+
+
+    public boolean validarLogin(String username, String password) {
+        String query = "SELECT * FROM Usuario WHERE usuario = ? AND password = ?";
+
+        DBUtil dbUtil = new DBUtil();
+        Connection conn = dbUtil.getConexion();
+
+        try (PreparedStatement ps = conn.prepareStatement(query)){
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            try (ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    Usuario usuario = new Usuario(
+                            rs.getInt("carga"),
+                            rs.getString("categoria"),
+                            rs.getInt("edad"),
+                            rs.getString("estado"),
+                            rs.getString("nombre"),
+                            rs.getString("password"),
+                            rs.getInt("peso"),
+                            rs.getString("usuario")
+                    );
+
+                    Usuario.setUsuarioActual(usuario);
+
+                    return true;
+                }
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            dbUtil.cerrarConexion();
+        }
+        return false;
     }
 }

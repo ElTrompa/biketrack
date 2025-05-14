@@ -8,7 +8,7 @@ public class DBUtil {
 
     Connection conexion = null;
 
-    public static Connection getConexion() {
+    public Connection getConexion() {
 
         String cadenaConexion = "jdbc:mysql://localhost:3306/biketrackdb";
         String usuario = "root";
