@@ -5,54 +5,37 @@ CREATE DATABASE BikeTrackDB;
 USE BikeTrackDB;
 
 -- Tabla Ciclistas
-CREATE TABLE Ciclistas (
-    id_ciclista INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE Usuario (
+    usuario INT AUTO_INCREMENT PRIMARY KEY,
+    password VARCHAR(12),
     nombre VARCHAR(100),
     edad INT,
     peso DECIMAL(5,2),
-    categoria VARCHAR(50),
+    categoria enum("competitivo", "principante", "aficionado"),
     carga int,
     estado enum("sobreentrenamiento", "mantenimiento", "perdida", "pico de forma",  "recuperacion")
 );
 
--- Tabla Entrenamientos
-CREATE TABLE Entrenamientos (
-    id_entrenamiento INT AUTO_INCREMENT PRIMARY KEY,
-    id_ciclista INT,
-    fecha DATE,
-    distancia DECIMAL(5,2),
-    tiempo TIME,
-    tipo_entrenamiento VARCHAR(50),
-    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
-);
-
 -- Tabla Rutas
-CREATE TABLE Rutas (
-    id_ruta INT AUTO_INCREMENT PRIMARY KEY,
-    id_ciclista INT,
-    nombre VARCHAR(100),
+CREATE TABLE rutas(
+    ruta INT AUTO_INCREMENT PRIMARY KEY,
+    nomobre varchar(255),
+    usuario INT,
     distancia DECIMAL(5,2),
     dificultad VARCHAR(50),
     ubicacion VARCHAR(100),
-    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+    tiempo time,
+    velocidadMedia DECIMAL(5,2),
+    FOREIGN KEY (usuario) REFERENCES Usuario(usuario)
 );
 
 -- Tabla Equipamiento
 CREATE TABLE Equipamiento (
-    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
-    id_ciclista INT,
+    equipo INT AUTO_INCREMENT PRIMARY KEY,
+    usuario INT,
     tipo VARCHAR(50),
     marca VARCHAR(50),
     modelo VARCHAR(50),
     estado VARCHAR(50),
-    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
-);
-
--- Tabla Usuarios (para autenticación)
-CREATE TABLE Usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    id_ciclista INT,
-    usuario VARCHAR(12) UNIQUE,
-    password VARCHAR(12),
-    FOREIGN KEY (id_ciclista) REFERENCES Ciclistas(id_ciclista)
+    FOREIGN KEY (usuario) REFERENCES Usuario(usuario)
 );

@@ -34,6 +34,7 @@ public class UsuarioModel extends DBUtil{
     // Método para insertar un nuevo usuario
     public boolean insert(Usuario u) {
         boolean resultado = false;
+
         try {
             String sql = "INSERT INTO usuario (id_usuario, password, usuario, id_ciclista) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = this.getConexion().prepareStatement(sql);
