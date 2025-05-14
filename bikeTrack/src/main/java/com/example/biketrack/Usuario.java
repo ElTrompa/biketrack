@@ -1,33 +1,71 @@
 package com.example.biketrack;
 
 public class Usuario {
-    private String id_usuario;
     private String usuario;
-    private String password;
-    private String id_ciclista;
+    private String Password;
+    private String nombre;
+    private int edad;
+    private double peso;
+    private String categoria;
+    private int carga;
+    private String estado;
 
-    public String getId_ciclista() {
-        return id_ciclista;
+    private static Usuario usuarioActual;
+
+    public int getCarga() {
+        return carga;
     }
 
-    public void setId_ciclista(String id_ciclista) {
-        this.id_ciclista = id_ciclista;
+    public void setCarga(int carga) {
+        this.carga = carga;
     }
 
-    public String getId_usuario() {
-        return id_usuario;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setId_usuario(String id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        Password = password;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
     }
 
     public String getUsuario() {
@@ -38,10 +76,22 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-    public Usuario(String id_usuario, String password, String usuario, String id_ciclista) {
-        this.id_usuario = id_usuario;
-        this.password = password;
+    public Usuario(int carga, String categoria, int edad, String estado, String nombre, String password, double peso, String usuario) {
+        this.carga = carga;
+        this.categoria = categoria;
+        this.edad = edad;
+        this.estado = estado;
+        this.nombre = nombre;
+        Password = password;
+        this.peso = peso;
         this.usuario = usuario;
-        this.id_ciclista = id_ciclista;
+    }
+
+    public static void setUsuarioActual(Usuario usuario) {
+        usuarioActual = usuario;
+    }
+
+    public static Usuario getUsuarioActual() {
+        return usuarioActual;
     }
 }
