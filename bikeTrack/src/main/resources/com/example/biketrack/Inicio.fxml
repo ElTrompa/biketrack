@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.InicioController">
    <children>
-       <Text fill="WHITE" layoutX="414.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="171.13671875">
+       <Text fill="WHITE" layoutX="389.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="196.13671875">
            <font>
-               <Font name="Arial Bold" size="17.0" />
+               <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
+      <Button onAction="#cambiarPantalla" fx:id="butonRuta" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" text="Añadir ruta" />
+      <Button onAction="#cambiarPantalla" fx:id="butonEquipamiento" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" text="Añadir equipamiento" />
+      <Button onAction="#cambiarPantalla" fx:id="butonProgreso" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Ver progreso" />
+      <Label fx:id="mostrarUsuario"  layoutX="43.0" layoutY="17.0" prefHeight="17.0" prefWidth="140.0" text="" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
