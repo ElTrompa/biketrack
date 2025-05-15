@@ -58,7 +58,7 @@ public class LoginController extends UsuarioModel {
             Usuario usuarioActual = Usuario.getUsuarioActual();
 
             // Carga la nueva interfaz desde el archivo FXML "inicio.fxml"
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("inicio.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Inicio.fxml"));
 
             // Crea una nueva escena con el contenido cargado
             Scene scene = new Scene(loader.load());

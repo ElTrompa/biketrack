@@ -3,10 +3,9 @@ package com.example.biketrack;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -31,22 +30,38 @@ public class InicioController   {
 
     @FXML
     public void initialize() {
-        mostrarUsuario.setText(Session.getUsuarioActual());
+
+       mostrarUsuario.setText(Usuario.getUsuarioActual().getNombre());
+
     };
 
-    @FXML
-    public void cambiarPantalla(ActionEvent event) {
+    private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("inicio.fxml"));
-            Scene scene = new Scene(loader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
+            Parent root = loader.load();
 
-            // Obtener el Stage desde el evento
+            Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
             stage.setScene(scene);
-            stage.setTitle("Progreso");
+            stage.setTitle(titulo);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            LoginController.mostrarAlerta("Error", "No se pudo cargar la nueva pantalla", Alert.AlertType.ERROR);
         }
     }
+
+
+    public void onRutaclick(ActionEvent event) {
+        cambiarPantalla("rutaNueva.fxml", "Añadir Ruta", event);
+    }
+
+    public void onEquipamientoclick(ActionEvent event) {
+        cambiarPantalla("equipamiento.fxml", "Añadir Equipamiento", event);
+    }
+
+    public void onProgresoclick(ActionEvent event) {
+        cambiarPantalla("progreso.fxml", "Ver Progreso", event);
+    }
+
 }

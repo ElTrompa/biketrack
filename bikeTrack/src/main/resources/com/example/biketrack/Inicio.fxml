@@ -11,9 +11,9 @@
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <Button onAction="#cambiarPantalla" fx:id="butonRuta" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" text="Añadir ruta" />
-      <Button onAction="#cambiarPantalla" fx:id="butonEquipamiento" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" text="Añadir equipamiento" />
-      <Button onAction="#cambiarPantalla" fx:id="butonProgreso" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Ver progreso" />
+      <Button onAction="#onRutaclick" fx:id="butonRuta" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" text="Añadir ruta" />
+      <Button onAction="#onEquipamientoclick" fx:id="butonEquipamiento" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" text="Añadir equipamiento" />
+      <Button onAction="#onProgresoclick" fx:id="butonProgreso" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Ver progreso" />
       <Label fx:id="mostrarUsuario"  layoutX="43.0" layoutY="17.0" prefHeight="17.0" prefWidth="140.0" text="" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
