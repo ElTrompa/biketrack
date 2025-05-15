@@ -57,11 +57,11 @@ public class InicioController   {
     }
 
     public void onEquipamientoclick(ActionEvent event) {
-        cambiarPantalla("equipamiento.fxml", "Añadir Equipamiento", event);
+        cambiarPantalla("Equipamiento.fxml", "Añadir Equipamiento", event);
     }
 
     public void onProgresoclick(ActionEvent event) {
-        cambiarPantalla("progreso.fxml", "Ver Progreso", event);
+        cambiarPantalla("Progreso.fxml", "Ver Progreso", event);
     }
 
 }
