@@ -18,5 +18,7 @@
        </Text>
       <TextField layoutX="315.0" layoutY="129.0" />
       <Label layoutX="243.0" layoutY="133.0" text="Kilometros" textFill="WHITE" />
+      <Label layoutX="243.0" layoutY="165.0" text="Tiempo" textFill="WHITE" />
+      <Label layoutX="243.0" layoutY="200.0" text="Velocidad media" textFill="WHITE" />
    </children>
 </Pane>
