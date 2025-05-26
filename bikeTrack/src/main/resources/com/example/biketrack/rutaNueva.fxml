@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="64.0" text="Label" textFill="WHITE">
+      <Label fx:id="nombreUsuario" layoutX="76.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -16,11 +19,15 @@
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <TextField layoutX="315.0" layoutY="129.0" />
-      <Label layoutX="243.0" layoutY="133.0" text="Kilometros" textFill="WHITE" />
-      <Label layoutX="243.0" layoutY="165.0" text="Tiempo" textFill="WHITE" />
-      <Label layoutX="243.0" layoutY="200.0" text="Velocidad media" textFill="WHITE" />
-      <TextField layoutX="315.0" layoutY="161.0" />
-      <TextField layoutX="349.0" layoutY="196.0" />
+      <TextField fx:id="kilometros" layoutX="407.0" layoutY="242.0" />
+      <Label layoutX="298.0" layoutY="246.0" text="Kilometros" textFill="WHITE" />
+      <Label layoutX="299.0" layoutY="280.0" text="Tiempo" textFill="WHITE" />
+      <Label layoutX="297.0" layoutY="315.0" text="Velocidad media" textFill="WHITE" />
+      <TextField fx:id="tiempo" layoutX="406.0" layoutY="276.0" />
+      <TextField fx:id="media" layoutX="406.0" layoutY="311.0" />
+      <Label layoutX="46.0" layoutY="84.0" text="Subir archivo GPX" textFill="WHITE" />
+      <Button fx:id="subirArchivo" layoutX="170.0" layoutY="80.0" mnemonicParsing="false" text="Subir archivo" />
+      <Label layoutX="296.0" layoutY="215.0" text="Desnivel" textFill="WHITE" />
+      <TextField fx:id="desnivel" layoutX="407.0" layoutY="211.0" />
    </children>
 </Pane>
