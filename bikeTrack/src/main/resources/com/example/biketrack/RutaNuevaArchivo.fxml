@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+
+      <Button layoutX="301.0" layoutY="143.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Seleccionar el arhivo" />
+      <Label layoutX="183.0" layoutY="147.0" text="Suba el archivo GPX" textFill="WHITE" />
+       <Label layoutX="183.0" layoutY="192.0" text="Selecionar Bicicleta" textFill="WHITE" />
+       <ComboBox fx:id="comboBoxBicicleta" layoutX="301.0" layoutY="188.0" prefWidth="150.0" />
+      <Button layoutX="441.0" layoutY="288.0" mnemonicParsing="false" text="Subir ruta" />
+      <Label layoutX="463.0" layoutY="34.0" text="BikeTrack" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="fotoPerfilUsuario" fitHeight="103.0" fitWidth="124.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

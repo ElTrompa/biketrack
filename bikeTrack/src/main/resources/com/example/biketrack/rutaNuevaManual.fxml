@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.RutaNuevaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.RutaNuevaManualController">
    <children>
-      <Label fx:id="nombreUsuario" layoutX="76.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" text="Label" textFill="WHITE">
+      <Label fx:id="nombreUsuario" layoutX="35.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -24,5 +24,8 @@
       <TextField fx:id="media" layoutX="280.0" layoutY="238.0" />
       <Label layoutX="170.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
       <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
+      <Label layoutX="172.0" layoutY="285.0" text="Selecionar Bicicleta" textFill="WHITE" />
+      <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="281.0" prefWidth="150.0" />
+      <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" text="Subir ruta" />
    </children>
 </Pane>

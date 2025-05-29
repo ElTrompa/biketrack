@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" />
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="nombreUsuario" layoutX="57.0" layoutY="68.0" textFill="WHITE" />
+      <Label layoutX="461.0" layoutY="38.0" text="BikeTrack" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="57.0" layoutY="115.0" text="Kilometros Totales" textFill="WHITE" />
+      <Label layoutX="52.0" layoutY="92.0" text="Estadisticas globales" textFill="WHITE" />
+      <Label fx:id="kilometrosTotales" layoutX="182.0" layoutY="115.0" textFill="WHITE" />
+      <Label layoutX="57.0" layoutY="132.0" text="Mestros de desnivel" textFill="WHITE" />
+      <Label fx:id="desnivelTotal" layoutX="182.0" layoutY="132.0" textFill="WHITE" />
+      <Label layoutX="57.0" layoutY="149.0" text="Horas totales" textFill="WHITE" />
+      <Label fx:id="horasTotales" layoutX="162.0" layoutY="158.0" textFill="WHITE" />
+      <Label layoutX="57.0" layoutY="167.0" text="Actividades totales" textFill="WHITE" />
+      <Label fx:id="actividadesTotales" layoutX="182.0" layoutY="176.0" text="Label" textFill="WHITE" />
+   </children>
+</Pane>
