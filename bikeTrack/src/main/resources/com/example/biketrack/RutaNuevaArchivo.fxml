@@ -19,5 +19,6 @@
          </font>
       </Label>
       <ImageView fx:id="fotoPerfilUsuario" fitHeight="103.0" fitWidth="124.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="volverAtrasButon" layoutX="24.0" layoutY="288.0" mnemonicParsing="false" text="Volver atras" />
    </children>
 </Pane>

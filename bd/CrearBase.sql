@@ -33,9 +33,9 @@ CREATE TABLE rutas(
 CREATE TABLE Equipamiento (
     equipo INT AUTO_INCREMENT PRIMARY KEY,
     usuario INT,
-    tipo VARCHAR(50),
+    peso INT,
     marca VARCHAR(50),
     modelo VARCHAR(50),
-    estado VARCHAR(50),
+    estado enum("nuevo", "seminuevo", "viejo", "retirado"),
     FOREIGN KEY (usuario) REFERENCES Usuario(usuario)
 );

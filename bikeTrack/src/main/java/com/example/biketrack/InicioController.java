@@ -15,18 +15,14 @@ public class InicioController   {
 
     @FXML
     private Label mostrarUsuario;
-
     @FXML
-    private Button butonRuta;
-
+    private Button butonProgresoButon;
     @FXML
-    private Button butonEquipamiento;
-
+    private Button butonRutaButon;
     @FXML
-    private Button butonEquipamento;
-
+    private Button cerrarSesionButton;
     @FXML
-    private Button butonProgreso;
+    private Button butonEquipamientoButon;
 
     @FXML
     public void initialize() {
@@ -52,14 +48,17 @@ public class InicioController   {
     }
 
 
+    @FXML
     public void onRutaclick(ActionEvent event) {
         cambiarPantalla("rutaNueva.fxml", "Añadir Ruta", event);
     }
 
+    @FXML
     public void onEquipamientoclick(ActionEvent event) {
         cambiarPantalla("Equipamiento.fxml", "Añadir Equipamiento", event);
     }
 
+    @FXML
     public void onProgresoclick(ActionEvent event) {
         cambiarPantalla("Progreso.fxml", "Ver Progreso", event);
     }
