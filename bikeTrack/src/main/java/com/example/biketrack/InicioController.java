@@ -23,6 +23,8 @@ public class InicioController   {
     private Button cerrarSesionButton;
     @FXML
     private Button butonEquipamientoButon;
+    @FXML
+    private Button verRutasButon;
 
     @FXML
     public void initialize() {

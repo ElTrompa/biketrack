@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.SelecionarRutaController">
+   <children>
+      <Label layoutX="483.0" layoutY="35.0" text="BikeTrack" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="volverAtrasButon" layoutX="450.0" layoutY="302.0" mnemonicParsing="false" text="Volver atras" />
+      <Label fx:id="nombreUsuario" layoutX="24.0" layoutY="14.0" textFill="WHITE" />
+      <Label layoutX="43.0" layoutY="116.0" prefHeight="30.0" prefWidth="92.0" text="Selecionar ruta" textFill="WHITE" />
+      <ComboBox fx:id="selecionarRutaComboBox" layoutX="150.0" layoutY="119.0" prefWidth="150.0" />
+   </children>
+</Pane>

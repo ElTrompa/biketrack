@@ -26,5 +26,6 @@
          </image>
       </ImageView>
       <Button fx:id="cerrarSesionButton" layoutX="487.0" layoutY="361.0" mnemonicParsing="false" text="Cerrar sesion" />
+      <Button fx:id="verRutasButon" layoutX="337.0" layoutY="361.0" mnemonicParsing="false" text="Ver rutas" />
    </children>
 </Pane>

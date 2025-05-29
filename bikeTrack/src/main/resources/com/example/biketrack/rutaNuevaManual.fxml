@@ -19,13 +19,11 @@
       <TextField fx:id="kilometros" layoutX="281.0" layoutY="169.0" />
       <Label layoutX="172.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
       <Label layoutX="173.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
-      <Label layoutX="171.0" layoutY="242.0" text="Velocidad media" textFill="WHITE" />
       <TextField fx:id="tiempo" layoutX="280.0" layoutY="203.0" />
-      <TextField fx:id="media" layoutX="280.0" layoutY="238.0" />
       <Label layoutX="170.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
       <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
-      <Label layoutX="172.0" layoutY="285.0" text="Selecionar Bicicleta" textFill="WHITE" />
-      <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="281.0" prefWidth="150.0" />
+      <Label layoutX="172.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
+      <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="237.0" prefWidth="150.0" />
       <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" text="Subir ruta" />
       <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" text="Volver atras" />
    </children>

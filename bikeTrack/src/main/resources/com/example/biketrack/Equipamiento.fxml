@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="mostrarUsuario" layoutX="14.0" layoutY="14.0" textFill="WHITE" />
@@ -14,7 +13,7 @@
          </font>
       </Label>
       <Button fx:id="volverAtrasButon" layoutX="478.0" layoutY="328.0" mnemonicParsing="false" text="Volver atras" />
-      <TableView fx:id="tablaEquipamiento" layoutX="53.0" layoutY="31.0" prefHeight="236.0" prefWidth="297.0" style="-fx-border-radius: 10;">
+      <TableView fx:id="tablaEquipamiento" layoutX="53.0" layoutY="31.0" prefHeight="236.0" prefWidth="297.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-radius: black;">
         <columns>
           <TableColumn prefWidth="75.0" text="Bicicleta" />
           <TableColumn prefWidth="75.0" text="Modelo" />
