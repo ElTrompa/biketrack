@@ -6,23 +6,18 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.RutaNuevaController">
    <children>
-      <Label fx:id="nombreUsuario" layoutX="76.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" text="Label" textFill="WHITE">
+      <Label fx:id="nombreUsuario" layoutX="76.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-       <Text fill="WHITE" layoutX="389.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="196.13671875">
+       <Text fill="WHITE" layoutX="389.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="196.13671875">
            <font>
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <TextField fx:id="kilometros" layoutX="281.0" layoutY="169.0" />
-      <Label layoutX="172.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
-      <Label layoutX="173.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
-      <Label layoutX="171.0" layoutY="242.0" text="Velocidad media" textFill="WHITE" />
-      <TextField fx:id="tiempo" layoutX="280.0" layoutY="203.0" />
-      <TextField fx:id="media" layoutX="280.0" layoutY="238.0" />
-      <Label layoutX="170.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
-      <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
+      <Button fx:id="manualButon" layoutX="140.0" layoutY="174.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Manual" />
+      <Button fx:id="subirArchivoButon" layoutX="339.0" layoutY="174.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Subir archivo" />
+      <Button fx:id="volverAtrasButon" layoutX="487.0" layoutY="330.0" mnemonicParsing="false" text="Volver atras" />
    </children>
 </Pane>

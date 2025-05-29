@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.biketrack.Equipamiento"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="mostrarUsuario" layoutX="14.0" layoutY="14.0" textFill="WHITE" />
+      <Label layoutX="472.0" layoutY="23.0" text="BikeTrack" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="volverAtrasButon" layoutX="478.0" layoutY="328.0" mnemonicParsing="false" text="Volver atras" />
+      <TableView fx:id="tablaEquipamiento" layoutX="53.0" layoutY="31.0" prefHeight="236.0" prefWidth="297.0" style="-fx-border-radius: 10;">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Bicicleta" />
+          <TableColumn prefWidth="75.0" text="Modelo" />
+            <TableColumn prefWidth="75.0" text="Marca" />
+            <TableColumn prefWidth="75.0" text="Estado" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>
