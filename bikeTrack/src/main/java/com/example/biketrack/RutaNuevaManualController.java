@@ -10,8 +10,6 @@ public class RutaNuevaManualController {
     @javafx.fxml.FXML
     private Label nombreUsuario;
     @javafx.fxml.FXML
-    private TextField media;
-    @javafx.fxml.FXML
     private Button volverAtrasButon;
     @javafx.fxml.FXML
     private ComboBox comboBoxBicicleta;

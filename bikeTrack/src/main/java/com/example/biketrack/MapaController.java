@@ -10,6 +10,8 @@ public class MapaController {
 
     @FXML
     private Pane mapPane;
+    @FXML
+    private Label infoLabel;
 
     @FXML
     public void initialize() {
