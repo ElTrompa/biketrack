@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,6 +37,8 @@ public class RutaNuevaManualController {
     @FXML
     public void initialize() {
         nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
+        cargarBicicletas(); // <--- Esta línea es necesaria
+        cargarCombosTiempo();
     }
 
     private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {
@@ -96,35 +95,55 @@ public class RutaNuevaManualController {
         String nombre = nombreRuta.getText();
         int desnivelInsertado = Integer.parseInt(desnivel.getText());
         double kilometrosInsertados = Double.parseDouble(kilometros.getText());
-        String dificultad = "media"; // O obtener desde otro control
-        String ubicacion = "desconocida"; // O obtener desde otro control
-        String tiempoStr = tiempoField.getText(); // formato HH:mm:ss
-        double velocidadMedia = 0.0; // Podrías calcular o obtener
+        String dificultad = "media";
+        String ubicacion = "desconocida";
 
-        String[] hms = tiempoStr.split(":");
-        int horas = Integer.parseInt(hms[0]);
-        int minutos = Integer.parseInt(hms[1]);
-        int segundos = Integer.parseInt(hms[2]);
+        Integer horas = (Integer) comboHoras.getValue();
+        Integer minutos = (Integer) comboMinutos.getValue();
+        Integer segundos = (Integer) comboSegundos.getValue();
+
+        if (horas == null || minutos == null || segundos == null) {
+            new Alert(Alert.AlertType.WARNING, "⚠ Debes seleccionar horas, minutos y segundos.").showAndWait();
+            return;
+        }
+
+        String tiempoStr = String.format("%02d:%02d:%02d", horas, minutos, segundos);
         double tiempoHoras = horas + minutos / 60.0 + segundos / 3600.0;
 
+        double velocidadMedia = kilometrosInsertados / tiempoHoras;
+
         try (Connection conn = DBUtil.getConexion()) {
-            String sql = "INSERT INTO Rutas (nombre, desnivel, usuario, distancia, dificultad, ubicacion, tiempo, velocidadMedia) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Rutas (nombre, desnivel, usuario, distancia, dificultad, ubicacion, tiempo, velocidadMedia) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, nombre);
-            stmt.setInt(2, desnivel);
+            stmt.setInt(2, desnivelInsertado);
             stmt.setInt(3, idUsuarioActual);
-            stmt.setDouble(4, kilometros);
+            stmt.setDouble(4, kilometrosInsertados);
             stmt.setString(5, dificultad);
             stmt.setString(6, ubicacion);
-            stmt.setTime(7, Time.valueOf(tiempoStr));
+            stmt.setTime(7, java.sql.Time.valueOf(tiempoStr));
             stmt.setDouble(8, velocidadMedia);
 
             stmt.executeUpdate();
-            System.out.println("✅ Ruta guardada correctamente.");
+            new Alert(Alert.AlertType.CONFIRMATION, "✅ Ruta guardada correctamente.").showAndWait();
 
+            nombreRuta.clear();
+            kilometros.clear();
+            desnivel.clear();
+            comboHoras.setValue(null);
+            comboMinutos.setValue(null);
+            comboSegundos.setValue(null);
+            comboBoxBicicleta.setValue(null);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void cargarCombosTiempo() {
+        for (int i = 0; i <= 23; i++) comboHoras.getItems().add(i);
+        for (int i = 0; i <= 59; i++) {
+            comboMinutos.getItems().add(i);
+            comboSegundos.getItems().add(i);
         }
     }
 
