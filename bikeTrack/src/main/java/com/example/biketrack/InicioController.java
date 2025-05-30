@@ -49,10 +49,14 @@ public class InicioController   {
         }
     }
 
+    @FXML
+    public void onNuevaRutaclick(ActionEvent event) {
+        cambiarPantalla("rutaNueva.fxml", "Añadir Ruta", event);
+    }
 
     @FXML
-    public void onRutaclick(ActionEvent event) {
-        cambiarPantalla("rutaNueva.fxml", "Añadir Ruta", event);
+    public void onVerRutaclick(ActionEvent event) {
+        cambiarPantalla("SelecionarRuta.fxml", "Selecionar Ruta", event);
     }
 
     @FXML
@@ -65,4 +69,8 @@ public class InicioController   {
         cambiarPantalla("Progreso.fxml", "Ver Progreso", event);
     }
 
+    @FXML
+    public void onCerrarSesionclick(ActionEvent event) {
+        cambiarPantalla("Login.fxml", "Añadir Ruta", event);
+    }
 }

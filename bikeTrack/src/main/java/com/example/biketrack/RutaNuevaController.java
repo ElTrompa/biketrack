@@ -1,5 +1,8 @@
 package com.example.biketrack;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
 public class RutaNuevaController {
     @javafx.fxml.FXML
     private Button subirArchivoButon;

@@ -12,7 +12,7 @@
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <Button fx:id="butonRutaButon" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" onAction="#onRutaclick" style="-fx-background-color: ffffff;" text="Añadir ruta" />
+      <Button fx:id="butonRutaButon" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" onAction="#onNuevaRutaclick" style="-fx-background-color: ffffff;" text="Añadir ruta" />
       <Button fx:id="butonEquipamientoButon" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" onAction="#onEquipamientoclick" style="-fx-background-color: ffffff;" text="Añadir equipamiento" />
       <Button fx:id="butonProgresoButon" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#onProgresoclick" style="-fx-background-color: ffffff;" text="Ver progreso" />
       <Label fx:id="mostrarUsuario" layoutX="168.0" layoutY="17.0" prefHeight="17.0" prefWidth="140.0" text="" textFill="WHITE">
