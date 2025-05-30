@@ -21,6 +21,6 @@
       <Label fx:id="horasTotales" layoutX="162.0" layoutY="158.0" textFill="WHITE" />
       <Label layoutX="57.0" layoutY="167.0" text="Actividades totales" textFill="WHITE" />
       <Label fx:id="actividadesTotales" layoutX="182.0" layoutY="167.0" textFill="WHITE" />
-      <Button layoutX="459.0" layoutY="332.0" mnemonicParsing="false" text="Volver al menu" />
+      <Button layoutX="459.0" layoutY="332.0" mnemonicParsing="false" onAction="#onVolverMenuclick" text="Volver al menu" />
    </children>
 </Pane>

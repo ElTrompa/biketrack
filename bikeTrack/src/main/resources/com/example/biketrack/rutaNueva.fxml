@@ -16,8 +16,8 @@
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <Button fx:id="manualButon" layoutX="140.0" layoutY="174.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Manual" />
-      <Button fx:id="subirArchivoButon" layoutX="339.0" layoutY="174.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Subir archivo" />
-      <Button fx:id="volverAtrasButon" layoutX="487.0" layoutY="330.0" mnemonicParsing="false" text="Volver atras" />
+      <Button fx:id="manualButon" layoutX="140.0" layoutY="174.0" mnemonicParsing="false" onAction="#onManualclick" prefHeight="50.0" prefWidth="100.0" text="Manual" />
+      <Button fx:id="subirArchivoButon" layoutX="339.0" layoutY="174.0" mnemonicParsing="false" onAction="#onArchivoclick" prefHeight="50.0" prefWidth="100.0" text="Subir archivo" />
+      <Button fx:id="volverAtrasButon" layoutX="487.0" layoutY="330.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
    </children>
 </Pane>

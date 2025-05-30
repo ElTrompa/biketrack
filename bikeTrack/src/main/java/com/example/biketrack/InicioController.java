@@ -28,9 +28,7 @@ public class InicioController   {
 
     @FXML
     public void initialize() {
-
        mostrarUsuario.setText(Usuario.getUsuarioActual().getNombre());
-
     };
 
     private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {

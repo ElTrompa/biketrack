@@ -11,9 +11,10 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="volverAtrasButon" layoutX="450.0" layoutY="302.0" mnemonicParsing="false" text="Volver atras" />
+      <Button fx:id="volverAtrasButon" layoutX="377.0" layoutY="299.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" prefHeight="25.0" prefWidth="106.0" text="Volver atras" />
       <Label fx:id="nombreUsuario" layoutX="24.0" layoutY="14.0" textFill="WHITE" />
       <Label layoutX="43.0" layoutY="116.0" prefHeight="30.0" prefWidth="92.0" text="Selecionar ruta" textFill="WHITE" />
       <ComboBox fx:id="selecionarRutaComboBox" layoutX="150.0" layoutY="119.0" prefWidth="150.0" />
+      <Button fx:id="rutaSelecionada" layoutX="377.0" layoutY="119.0" mnemonicParsing="false" onAction="#onRutaSelecionadaclick" text="Ruta selecionada" />
    </children>
 </Pane>

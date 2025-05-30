@@ -24,7 +24,7 @@
       <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
       <Label layoutX="172.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
       <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="237.0" prefWidth="150.0" />
-      <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" text="Subir ruta" />
-      <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" text="Volver atras" />
+      <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSubirRutaclick" text="Subir ruta" />
+      <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
    </children>
 </Pane>
