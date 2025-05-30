@@ -11,10 +11,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RutaNuevaManualController {
     @javafx.fxml.FXML
@@ -52,10 +53,12 @@ public class RutaNuevaManualController {
     }
 
     private void cargarBicicletas() {
-        try (Connection conn = DBUtil.getConnection()) {
-            String query = "SELECT * FROM Bicicleta WHERE usuario = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, usuarioActual.getUsuario());
+        int idUsuarioActual = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
+
+        try (Connection conn = DBUtil.getConexion()) {
+            int query = Integer.parseInt("SELECT * FROM Bicicleta WHERE usuario = ?");
+            PreparedStatement stmt = conn.prepareStatement(String.valueOf(query));
+            stmt.setInt(1, idUsuarioActual);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -67,7 +70,7 @@ public class RutaNuevaManualController {
                         rs.getString("modelo"),
                         rs.getString("estado")
                 );
-                bicicletaComboBox.getItems().add(bici);
+                comboBoxBicicleta.getItems().add(bici);
             }
 
         } catch (SQLException e) {

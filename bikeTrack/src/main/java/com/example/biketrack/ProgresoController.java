@@ -25,10 +25,8 @@ public class ProgresoController {
 
     @FXML
     public void initialize() {
-
         nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
-
-    };
+    }
 
     private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {
         try {
