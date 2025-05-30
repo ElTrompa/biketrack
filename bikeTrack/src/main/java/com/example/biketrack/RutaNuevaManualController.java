@@ -19,8 +19,6 @@ import java.sql.SQLException;
 
 public class RutaNuevaManualController {
     @javafx.fxml.FXML
-    private TextField tiempo;
-    @javafx.fxml.FXML
     private TextField kilometros;
     @javafx.fxml.FXML
     private TextField desnivel;
@@ -32,6 +30,12 @@ public class RutaNuevaManualController {
     private ComboBox comboBoxBicicleta;
     @FXML
     private TextField nombreRuta;
+    @FXML
+    private ComboBox comboSegundos;
+    @FXML
+    private ComboBox comboHoras;
+    @FXML
+    private ComboBox comboMinutos;
 
     @FXML
     public void initialize() {
@@ -110,7 +114,7 @@ public class RutaNuevaManualController {
             stmt.setString(1, nombre);
             stmt.setInt(2, desnivel);
             stmt.setInt(3, idUsuarioActual);
-            stmt.setDouble(4, distancia);
+            stmt.setDouble(4, kilometros);
             stmt.setString(5, dificultad);
             stmt.setString(6, ubicacion);
             stmt.setTime(7, Time.valueOf(tiempoStr));

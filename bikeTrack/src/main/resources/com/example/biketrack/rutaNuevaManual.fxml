@@ -5,28 +5,36 @@
 <?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.RutaNuevaManualController">
-   <children>
-      <Label fx:id="nombreUsuario" layoutX="35.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-       <Text fill="WHITE" layoutX="389.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="196.13671875">
-           <font>
-               <Font name="Arial Bold" size="20.0" />
-           </font>
-       </Text>
-      <TextField fx:id="kilometros" layoutX="281.0" layoutY="169.0" />
-      <Label layoutX="164.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
-      <Label layoutX="164.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
-      <TextField fx:id="tiempo" layoutX="280.0" layoutY="203.0" />
-      <Label layoutX="165.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
-      <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
-      <Label layoutX="163.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
-      <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="237.0" prefWidth="150.0" />
-      <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSubirRutaclick" text="Subir ruta" />
-      <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
-      <Label layoutX="165.0" layoutY="108.0" text="Nombre de la ruta" textFill="WHITE" />
-      <TextField fx:id="nombreRuta" layoutX="281.0" layoutY="104.0" prefHeight="25.0" prefWidth="149.0" />
-   </children>
+    <children>
+        <Label fx:id="nombreUsuario" layoutX="35.0" layoutY="21.0" prefHeight="30.0" prefWidth="64.0" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Text fill="WHITE" layoutX="389.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BIKETRACK" textAlignment="CENTER" wrappingWidth="196.13671875">
+            <font>
+                <Font name="Arial Bold" size="20.0" />
+            </font>
+        </Text>
+        <TextField fx:id="kilometros" layoutX="281.0" layoutY="169.0" prefHeight="25.0" prefWidth="259.0" />
+        <Label layoutX="164.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
+        <Label layoutX="164.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
+        <HBox layoutX="280.0" layoutY="203.0" spacing="10">
+            <children>
+                <ComboBox fx:id="comboHoras" prefWidth="70" promptText="HH" />
+                <Label text=":" textFill="WHITE" />
+                <ComboBox fx:id="comboMinutos" prefHeight="26.0" prefWidth="70" promptText="MM" />
+                <Label text=":" textFill="WHITE" />
+                <ComboBox fx:id="comboSegundos" prefWidth="70" promptText="SS" />
+            </children>
+        </HBox>
+        <Label layoutX="165.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
+        <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" prefHeight="25.0" prefWidth="259.0" />
+        <Label layoutX="163.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
+        <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="237.0" prefHeight="25.0" prefWidth="259.0" />
+        <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSubirRutaclick" text="Subir ruta" />
+        <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
+        <Label layoutX="165.0" layoutY="108.0" text="Nombre de la ruta" textFill="WHITE" />
+        <TextField fx:id="nombreRuta" layoutX="281.0" layoutY="104.0" prefHeight="25.0" prefWidth="259.0" />
+    </children>
 </Pane>
