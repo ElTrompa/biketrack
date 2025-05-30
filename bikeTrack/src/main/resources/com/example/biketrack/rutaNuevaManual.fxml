@@ -17,14 +17,16 @@
            </font>
        </Text>
       <TextField fx:id="kilometros" layoutX="281.0" layoutY="169.0" />
-      <Label layoutX="172.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
-      <Label layoutX="173.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
+      <Label layoutX="164.0" layoutY="173.0" text="Kilometros" textFill="WHITE" />
+      <Label layoutX="164.0" layoutY="207.0" text="Tiempo" textFill="WHITE" />
       <TextField fx:id="tiempo" layoutX="280.0" layoutY="203.0" />
-      <Label layoutX="170.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
+      <Label layoutX="165.0" layoutY="142.0" text="Desnivel" textFill="WHITE" />
       <TextField fx:id="desnivel" layoutX="281.0" layoutY="138.0" />
-      <Label layoutX="172.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
+      <Label layoutX="163.0" layoutY="241.0" text="Selecionar Bicicleta" textFill="WHITE" />
       <ComboBox fx:id="comboBoxBicicleta" layoutX="280.0" layoutY="237.0" prefWidth="150.0" />
       <Button layoutX="468.0" layoutY="320.0" mnemonicParsing="false" onAction="#onSubirRutaclick" text="Subir ruta" />
       <Button fx:id="volverAtrasButon" layoutX="41.0" layoutY="320.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
+      <Label layoutX="165.0" layoutY="108.0" text="Nombre de la ruta" textFill="WHITE" />
+      <TextField fx:id="nombreRuta" layoutX="281.0" layoutY="104.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </Pane>
