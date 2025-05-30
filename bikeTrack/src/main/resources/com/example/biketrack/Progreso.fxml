@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -22,5 +23,13 @@
       <Label layoutX="57.0" layoutY="167.0" text="Actividades totales" textFill="WHITE" />
       <Label fx:id="actividadesTotales" layoutX="182.0" layoutY="167.0" textFill="WHITE" />
       <Button layoutX="459.0" layoutY="332.0" mnemonicParsing="false" onAction="#onVolverMenuclick" text="Volver al menu" />
+      <BarChart fx:id="barChart" layoutX="277.0" layoutY="109.0" prefHeight="200.0" prefWidth="230.0">
+         <xAxis>
+            <CategoryAxis label="Mes" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis label="Kilómetros" />
+         </yAxis>
+      </BarChart>
    </children>
 </Pane>
