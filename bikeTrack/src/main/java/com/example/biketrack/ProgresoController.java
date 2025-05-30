@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -25,11 +29,66 @@ public class ProgresoController {
     private Label kilometrosTotales;
     @javafx.fxml.FXML
     private Label nombreUsuario;
+    @FXML
+    private BarChart<String, Number> barChart;
 
     @FXML
     public void initialize() {
         nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
-        cargarEstadisticas();
+        configurarGrafica();
+        cargarGrafica();
+    }
+
+    private void configurarGrafica() {
+        // Fondo transparente para que se integre con el fondo azul oscuro del Pane
+        barChart.setStyle("-fx-background-color: transparent;");
+
+        // Configurar ejes para que el texto sea blanco y sin bordes visibles
+        CategoryAxis xAxis = (CategoryAxis) barChart.getXAxis();
+        NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
+
+        xAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
+        xAxis.setTickLabelRotation(45); // Gira etiquetas para que no se amontonen
+        xAxis.setStyle("-fx-border-color: transparent;");
+
+        yAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
+        yAxis.setMinorTickVisible(false);
+        yAxis.setStyle("-fx-border-color: transparent;");
+
+        // Opcional: quitar leyenda si no la necesitas
+        barChart.setLegendVisible(false);
+
+        // Configurar líneas de grid (opcional para que sean suaves y menos invasivas)
+        yAxis.setTickMarkVisible(false);
+        yAxis.setTickLength(0);
+    }
+
+    private void cargarGrafica() {
+        barChart.getData().clear();
+
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Km recorridos");
+
+        // Datos ejemplo (puedes reemplazarlos con datos reales)
+        series.getData().add(new XYChart.Data<>("Enero", 120));
+        series.getData().add(new XYChart.Data<>("Febrero", 90));
+        series.getData().add(new XYChart.Data<>("Marzo", 150));
+        series.getData().add(new XYChart.Data<>("Abril", 200));
+        series.getData().add(new XYChart.Data<>("Mayo", 180));
+
+        barChart.getData().add(series);
+
+        // Cambiar color de las barras directamente con estilo en línea
+        for (XYChart.Data<String, Number> data : series.getData()) {
+            data.nodeProperty().addListener((obs, oldNode, newNode) -> {
+                if (newNode != null) {
+                    newNode.setStyle("-fx-bar-fill: #00C8FF;"); // azul brillante
+                }
+            });
+            if (data.getNode() != null) {
+                data.getNode().setStyle("-fx-bar-fill: #00C8FF;");
+            }
+        }
     }
 
     private void cargarEstadisticas() {

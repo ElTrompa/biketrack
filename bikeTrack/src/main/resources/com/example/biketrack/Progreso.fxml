@@ -5,7 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.ProgresoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="400.0" prefWidth="600.0"
+      style="-fx-background-color: #0A285A;"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.biketrack.ProgresoController">
+
    <children>
       <Label fx:id="nombreUsuario" layoutX="57.0" layoutY="68.0" textFill="WHITE" />
       <Label layoutX="461.0" layoutY="38.0" text="BikeTrack" textFill="WHITE">
@@ -13,17 +19,23 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="57.0" layoutY="115.0" text="Kilometros Totales" textFill="WHITE" />
-      <Label layoutX="52.0" layoutY="92.0" text="Estadisticas globales" textFill="WHITE" />
+
+      <Label layoutX="57.0" layoutY="92.0" text="Estadísticas globales" textFill="WHITE" />
+      <Label layoutX="57.0" layoutY="115.0" text="Kilómetros Totales" textFill="WHITE" />
       <Label fx:id="kilometrosTotales" layoutX="182.0" layoutY="115.0" textFill="WHITE" />
-      <Label layoutX="57.0" layoutY="132.0" text="Mestros de desnivel" textFill="WHITE" />
+
+      <Label layoutX="57.0" layoutY="132.0" text="Metros de desnivel" textFill="WHITE" />
       <Label fx:id="desnivelTotal" layoutX="182.0" layoutY="132.0" textFill="WHITE" />
+
       <Label layoutX="57.0" layoutY="149.0" text="Horas totales" textFill="WHITE" />
       <Label fx:id="horasTotales" layoutX="162.0" layoutY="158.0" textFill="WHITE" />
+
       <Label layoutX="57.0" layoutY="167.0" text="Actividades totales" textFill="WHITE" />
       <Label fx:id="actividadesTotales" layoutX="182.0" layoutY="167.0" textFill="WHITE" />
-      <Button layoutX="459.0" layoutY="332.0" mnemonicParsing="false" onAction="#onVolverMenuclick" text="Volver al menu" />
-      <BarChart fx:id="barChart" layoutX="277.0" layoutY="109.0" prefHeight="200.0" prefWidth="230.0">
+
+      <Button layoutX="459.0" layoutY="332.0" mnemonicParsing="false" onAction="#onVolverMenuclick" text="Volver al menú" />
+
+      <BarChart fx:id="barChart" layoutX="277.0" layoutY="109.0" prefHeight="200.0" prefWidth="300.0" >
          <xAxis>
             <CategoryAxis label="Mes" />
          </xAxis>
