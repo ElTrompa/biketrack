@@ -3,11 +3,9 @@ package com.example.biketrack;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,9 +27,6 @@ public class RutaNuevaArchivoController {
 
     @FXML
     private ImageView fotoPerfilUsuario;
-
-    @FXML
-    private Label nombreUsuario;
 
     private File archivoSeleccionado;
 

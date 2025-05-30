@@ -40,25 +40,21 @@ public class ProgresoController {
     }
 
     private void configurarGrafica() {
-        // Fondo transparente para que se integre con el fondo azul oscuro del Pane
         barChart.setStyle("-fx-background-color: transparent;");
 
-        // Configurar ejes para que el texto sea blanco y sin bordes visibles
         CategoryAxis xAxis = (CategoryAxis) barChart.getXAxis();
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
 
         xAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
-        xAxis.setTickLabelRotation(45); // Gira etiquetas para que no se amontonen
+        xAxis.setTickLabelRotation(45);
         xAxis.setStyle("-fx-border-color: transparent;");
 
         yAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
         yAxis.setMinorTickVisible(false);
         yAxis.setStyle("-fx-border-color: transparent;");
 
-        // Opcional: quitar leyenda si no la necesitas
         barChart.setLegendVisible(false);
 
-        // Configurar líneas de grid (opcional para que sean suaves y menos invasivas)
         yAxis.setTickMarkVisible(false);
         yAxis.setTickLength(0);
     }
@@ -69,7 +65,6 @@ public class ProgresoController {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Km recorridos");
 
-        // Datos ejemplo (puedes reemplazarlos con datos reales)
         series.getData().add(new XYChart.Data<>("Enero", 120));
         series.getData().add(new XYChart.Data<>("Febrero", 90));
         series.getData().add(new XYChart.Data<>("Marzo", 150));
@@ -78,7 +73,6 @@ public class ProgresoController {
 
         barChart.getData().add(series);
 
-        // Cambiar color de las barras directamente con estilo en línea
         for (XYChart.Data<String, Number> data : series.getData()) {
             data.nodeProperty().addListener((obs, oldNode, newNode) -> {
                 if (newNode != null) {
