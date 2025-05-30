@@ -11,7 +11,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="volverAtrasButon" layoutX="486.0" layoutY="338.0" mnemonicParsing="false" text="Volver atras" />
+      <Button fx:id="volverAtrasButon" layoutX="486.0" layoutY="338.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
       <ComboBox fx:id="estadoComboBox" layoutX="200.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="70.0" layoutY="204.0" text="Estado de la bicicleta" textFill="WHITE" />
       <Label layoutX="70.0" layoutY="170.0" text="Marca de la bicicleta" textFill="WHITE" />
@@ -20,7 +20,7 @@
       <TextField fx:id="modeloBicicleta" layoutX="199.0" layoutY="134.0" prefHeight="25.0" prefWidth="149.0" />
       <Label layoutX="70.0" layoutY="109.0" text="Peso" textFill="WHITE" />
       <Slider fx:id="pesoSlider" layoutX="199.0" layoutY="111.0" max="25.0" prefHeight="14.0" prefWidth="149.0" />
-      <Button fx:id="guardarButon" layoutX="362.0" layoutY="338.0" mnemonicParsing="false" text="Guardar" />
+      <Button fx:id="guardarButon" layoutX="362.0" layoutY="338.0" mnemonicParsing="false" onAction="#onGuardarEquipamientoclick" text="Guardar" />
       <Label fx:id="nombreUsuario" layoutX="27.0" layoutY="18.0" textFill="WHITE" />
    </children>
 </Pane>

@@ -12,7 +12,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="volverAtrasButon" layoutX="478.0" layoutY="328.0" mnemonicParsing="false" text="Volver atras" />
+      <Button fx:id="volverAtrasButon" layoutX="478.0" layoutY="328.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
       <TableView fx:id="tablaEquipamiento" layoutX="53.0" layoutY="31.0" prefHeight="236.0" prefWidth="297.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-radius: black;">
         <columns>
           <TableColumn prefWidth="75.0" text="Bicicleta" />
