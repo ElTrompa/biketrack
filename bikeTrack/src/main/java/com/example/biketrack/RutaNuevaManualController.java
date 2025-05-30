@@ -13,6 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class RutaNuevaManualController {
     @javafx.fxml.FXML
@@ -49,15 +51,37 @@ public class RutaNuevaManualController {
         }
     }
 
+    private void cargarBicicletas() {
+        try (Connection conn = DBUtil.getConnection()) {
+            String query = "SELECT * FROM Bicicleta WHERE usuario = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, usuarioActual.getUsuario());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Bicicleta bici = new Bicicleta(
+                        rs.getInt("equipo"),
+                        rs.getInt("usuario"),
+                        rs.getDouble("peso"),
+                        rs.getString("marca"),
+                        rs.getString("modelo"),
+                        rs.getString("estado")
+                );
+                bicicletaComboBox.getItems().add(bici);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     public void onVolverAtrasclick(ActionEvent event) {
         cambiarPantalla("rutaNueva.fxml", "Volver a rutaNueva", event);
     }
 
-    /*
     @FXML
     public void onSubirRutaclick(ActionEvent event) {
 
     }
-    */
 }

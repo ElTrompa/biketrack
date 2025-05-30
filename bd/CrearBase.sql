@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS Bicicleta (
 CREATE TABLE IF NOT EXISTS Rutas (
     ruta INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255),
+    desnivel INT,
     usuario INT,
     distancia DECIMAL(7,2),
     dificultad VARCHAR(50),
