@@ -3,13 +3,17 @@ package com.example.biketrack;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RutaNuevaArchivoController {
 
@@ -23,18 +27,30 @@ public class RutaNuevaArchivoController {
     private Button volverAtrasButon;
 
     @FXML
-    private ComboBox<String> comboBoxBicicleta;
-
-    @FXML
-    private ImageView fotoPerfilUsuario;
+    private ComboBox<Bicicleta> comboBoxBicicleta;
 
     private File archivoSeleccionado;
 
+    private Connection connection;
+
     @FXML
     public void initialize() {
-        // Aquí puedes cargar las bicicletas en el comboBox, ejemplo:
-        comboBoxBicicleta.getItems().addAll("Bicicleta 1", "Bicicleta 2", "Bicicleta 3");
-        comboBoxBicicleta.getSelectionModel().selectFirst();
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:biketrack.db");
+
+            String idUsuario = Usuario.getUsuarioActual().getUsuario();
+            List<Bicicleta> bicicletas = getBicicletasUsuario(Integer.parseInt(idUsuario));
+
+            if (bicicletas == null || bicicletas.isEmpty()) {
+                System.out.println("⚠ No se encontraron bicicletas para el usuario.");
+            } else {
+                comboBoxBicicleta.getItems().addAll(bicicletas);
+                comboBoxBicicleta.getSelectionModel().selectFirst();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("❌ Error al conectar o cargar las bicicletas.");
+        }
     }
 
     @FXML
@@ -43,8 +59,10 @@ public class RutaNuevaArchivoController {
         fileChooser.setTitle("Seleccionar archivo GPX");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Archivos GPX", "*.gpx"));
+
         Window window = seleccionarArchivoButton.getScene().getWindow();
         File file = fileChooser.showOpenDialog(window);
+
         if (file != null) {
             archivoSeleccionado = file;
             seleccionarArchivoButton.setText(file.getName());
@@ -54,36 +72,57 @@ public class RutaNuevaArchivoController {
     @FXML
     private void onSubirRuta() {
         if (archivoSeleccionado == null) {
-            System.out.println("No se ha seleccionado ningún archivo.");
+            System.out.println("⚠ No se ha seleccionado ningún archivo.");
             return;
         }
-        String bicicletaSeleccionada = comboBoxBicicleta.getSelectionModel().getSelectedItem();
+
+        Bicicleta bicicletaSeleccionada = comboBoxBicicleta.getSelectionModel().getSelectedItem();
         if (bicicletaSeleccionada == null) {
-            System.out.println("No se ha seleccionado ninguna bicicleta.");
+            System.out.println("⚠ No se ha seleccionado ninguna bicicleta.");
             return;
         }
 
         try {
-            // Ejemplo: convertir el archivo GPX a un byte array para almacenarlo
             byte[] gpxData = Files.readAllBytes(archivoSeleccionado.toPath());
 
-            // Suponiendo que tienes una clase Database con un método para subir rutas
-            Database db = Database.getInstance(); // método singleton o similar
-            db.uploadRuta(bicicletaSeleccionada, gpxData);
+            Database.getInstance().uploadRuta(bicicletaSeleccionada.getEquipo(), gpxData);
 
-            System.out.println("Archivo GPX '" + archivoSeleccionado.getName() + "' subido para " + bicicletaSeleccionada);
+            System.out.println("✅ Archivo GPX '" + archivoSeleccionado.getName()
+                    + "' subido para la bicicleta: " + bicicletaSeleccionada);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error leyendo el archivo GPX.");
+            System.out.println("❌ Error leyendo el archivo GPX.");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error al subir la ruta a la base de datos.");
+            System.out.println("❌ Error al subir la ruta a la base de datos.");
         }
     }
 
-
     @FXML
     private void onVolverAtras() {
-        System.out.println("Volver atras pulsado");
+        System.out.println("🔙 Volver atrás pulsado");
+    }
+
+    private List<Bicicleta> getBicicletasUsuario(int idUsuario) throws SQLException {
+        List<Bicicleta> lista = new ArrayList<>();
+        String sql = "SELECT equipo, usuario, peso, marca, modelo, estado FROM bicicletas WHERE usuario = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, idUsuario);
+            var rs = stmt.executeQuery();
+            while (rs.next()) {
+                Bicicleta bici = new Bicicleta(
+                        rs.getInt("equipo"),
+                        rs.getInt("usuario"),
+                        rs.getDouble("peso"),
+                        rs.getString("marca"),
+                        rs.getString("modelo"),
+                        rs.getString("estado")
+                );
+                lista.add(bici);
+            }
+        }
+
+        return lista;
     }
 }

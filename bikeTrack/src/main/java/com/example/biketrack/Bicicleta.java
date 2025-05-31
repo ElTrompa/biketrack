@@ -73,4 +73,9 @@ public class Bicicleta {
         this.modelo = modelo;
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return marca + " " + modelo;
+    }
 }
