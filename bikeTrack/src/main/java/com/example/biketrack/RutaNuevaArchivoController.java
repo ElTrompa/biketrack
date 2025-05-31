@@ -57,8 +57,7 @@ public class RutaNuevaArchivoController {
     private void onSeleccionarArchivo() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar archivo GPX");
-        fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Archivos GPX", "*.gpx"));
+        fileChooser.getExtensionFilters().add( new FileChooser.ExtensionFilter("Archivos GPX", "*.gpx"));
 
         Window window = seleccionarArchivoButton.getScene().getWindow();
         File file = fileChooser.showOpenDialog(window);
