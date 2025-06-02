@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.RegistroController">
+   <children>
+      <Button fx:id="regitrarBt" layoutX="419.0" layoutY="292.0" mnemonicParsing="false" onAction="#registrarPaciente" text="Registrar" />
+      <Label layoutX="184.0" layoutY="118.0" text="Nombre del paciente" />
+      <Label layoutX="270.0" layoutY="147.0" text="Sexo" />
+      <Label layoutX="270.0" layoutY="175.0" text="Edad" />
+      <Label layoutX="246.0" layoutY="208.0" text="Provincia" />
+      <TextField fx:id="nombreField" layoutX="333.0" layoutY="114.0" />
+      <TextField fx:id="edadField" layoutX="333.0" layoutY="171.0" />
+      <CheckBox fx:id="mascleBt" layoutX="333.0" layoutY="147.0" mnemonicParsing="false" text="Mascle" />
+      <CheckBox fx:id="femellaBt" layoutX="419.0" layoutY="147.0" mnemonicParsing="false" text="Femella" />
+      <ComboBox fx:id="provinciaCb" layoutX="332.0" layoutY="204.0" prefWidth="150.0" />
+   </children>
+</Pane>
