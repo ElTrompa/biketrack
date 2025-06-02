@@ -12,8 +12,8 @@
                <Font name="Arial Bold" size="20.0" />
            </font>
        </Text>
-      <Button fx:id="butonRutaButon" layoutX="249.0" layoutY="361.0" mnemonicParsing="false" onAction="#onNuevaRutaclick" style="-fx-background-color: ffffff;" text="Añadir ruta" />
-      <Button fx:id="butonEquipamientoButon" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" onAction="#onEquipamientoclick" style="-fx-background-color: ffffff;" text="Añadir equipamiento" />
+      <Button fx:id="butonRutaButon" layoutX="224.0" layoutY="361.0" mnemonicParsing="false" onAction="#onNuevaRutaclick" style="-fx-background-color: ffffff;" text="Añadir ruta" />
+      <Button fx:id="butonEquipamientoButon" layoutX="110.0" layoutY="361.0" mnemonicParsing="false" onAction="#onEquipamientoclick" style="-fx-background-color: ffffff;" text="Equipamiento" />
       <Button fx:id="butonProgresoButon" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#onProgresoclick" style="-fx-background-color: ffffff;" text="Ver progreso" />
       <Label fx:id="mostrarUsuario" layoutX="168.0" layoutY="17.0" prefHeight="17.0" prefWidth="140.0" text="" textFill="WHITE">
          <font>
@@ -26,6 +26,6 @@
          </image>
       </ImageView>
       <Button fx:id="cerrarSesionButton" layoutX="487.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCerrarSesionclick" text="Cerrar sesion" />
-      <Button fx:id="verRutasButon" layoutX="337.0" layoutY="361.0" mnemonicParsing="false" onAction="#onVerRutaclick" text="Ver rutas" />
+      <Button fx:id="verRutasButon" layoutX="325.0" layoutY="361.0" mnemonicParsing="false" onAction="#onVerRutaclick" text="Ver rutas" />
    </children>
 </Pane>

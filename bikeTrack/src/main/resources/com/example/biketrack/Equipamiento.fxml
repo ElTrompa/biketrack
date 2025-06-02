@@ -2,25 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.EquipamientoController">
-   <children>
-      <Label fx:id="mostrarUsuario" layoutX="14.0" layoutY="14.0" textFill="WHITE" />
-      <Label layoutX="472.0" layoutY="23.0" text="BikeTrack" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="volverAtrasButon" layoutX="478.0" layoutY="328.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
-      <TableView fx:id="tablaEquipamiento" layoutX="53.0" layoutY="31.0" prefHeight="236.0" prefWidth="297.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-border-radius: black;">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Bicicleta" />
-          <TableColumn prefWidth="75.0" text="Modelo" />
-            <TableColumn prefWidth="75.0" text="Marca" />
-            <TableColumn prefWidth="75.0" text="Estado" />
-        </columns>
-      </TableView>
-      <Button fx:id="añadirEquipamiento" layoutX="333.0" layoutY="328.0" mnemonicParsing="false" onAction="#onCambioAñadirEquipamiento" text="Añadir Equipamiento" />
-   </children>
-</Pane>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" prefWidth="800" prefHeight="500" style="-fx-background-color: #0A285A;" fx:controller="com.example.biketrack.EquipamientoController">
+    <Label fx:id="mostrarUsuario" layoutX="20" layoutY="10" textFill="WHITE" />
+    <TableView fx:id="tablaEquipamiento" layoutX="20" layoutY="40" prefHeight="200" prefWidth="760" />
+    <Label layoutX="20" layoutY="260" text="Marca:" textFill="WHITE" />
+    <TextField fx:id="marcaBicicleta" layoutX="80" layoutY="256" prefWidth="150" />
+    <Label layoutX="250" layoutY="260" text="Modelo:" textFill="WHITE" />
+    <TextField fx:id="modeloBicicleta" layoutX="310" layoutY="256" prefWidth="150" />
+    <Label layoutX="20" layoutY="300" text="Estado:" textFill="WHITE" />
+    <ComboBox fx:id="estadoComboBox" layoutX="80" layoutY="296" prefWidth="150" />
+    <Label layoutX="250" layoutY="300" text="Peso:" textFill="WHITE" />
+    <Slider fx:id="pesoSlider" layoutX="310" layoutY="296" max="25" prefWidth="150" />
+    <Button text="Guardar" layoutX="500" layoutY="296" onAction="#onGuardarEquipamientoclick" />
+    <Button text="Volver" layoutX="600" layoutY="296" onAction="#onVolverAtrasclick" />
+</AnchorPane>

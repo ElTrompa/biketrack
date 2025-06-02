@@ -8,18 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,33 +23,34 @@ public class EquipamientoController {
     private TableView<Bicicleta> tablaEquipamiento;
 
     @FXML
-    private Button volverAtrasButon;
-
-    @FXML
     private Label mostrarUsuario;
 
-    private Connection connection;
     @FXML
-    private Button añadirEquipamiento;
+    private TextField marcaBicicleta;
+
+    @FXML
+    private TextField modeloBicicleta;
+
+    @FXML
+    private ComboBox<String> estadoComboBox;
+
+    @FXML
+    private Slider pesoSlider;
+
+    private Connection connection;
 
     @FXML
     public void initialize() {
         mostrarUsuario.setText(Usuario.getUsuarioActual().getNombre());
 
         connection = DBUtil.getConexion();
-
-        // Crear columnas dinámicamente para no modificar FXML
         crearColumnasTabla();
 
-        try {
-            int idUsuario = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
-            List<Bicicleta> listaBicicletas = getBicicletasUsuario(idUsuario);
-            ObservableList<Bicicleta> bicicletasObservable = FXCollections.observableArrayList(listaBicicletas);
-            tablaEquipamiento.setItems(bicicletasObservable);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("❌ Error cargando bicicletas del usuario.");
-        }
+        estadoComboBox.setItems(FXCollections.observableArrayList(
+                "nuevo", "seminuevo", "viejo", "retirado" // Coinciden con ENUM en la BD
+        ));
+
+        cargarBicicletas();
     }
 
     private void crearColumnasTabla() {
@@ -71,8 +66,19 @@ public class EquipamientoController {
         TableColumn<Bicicleta, String> colEstado = new TableColumn<>("Estado");
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
-        tablaEquipamiento.getColumns().clear(); // Por si acaso hay columnas ya
+        tablaEquipamiento.getColumns().clear();
         tablaEquipamiento.getColumns().addAll(colEquipo, colMarca, colModelo, colEstado);
+    }
+
+    private void cargarBicicletas() {
+        try {
+            int idUsuario = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
+            List<Bicicleta> listaBicicletas = getBicicletasUsuario(idUsuario);
+            ObservableList<Bicicleta> bicicletasObservable = FXCollections.observableArrayList(listaBicicletas);
+            tablaEquipamiento.setItems(bicicletasObservable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private List<Bicicleta> getBicicletasUsuario(int idUsuario) throws SQLException {
@@ -97,28 +103,70 @@ public class EquipamientoController {
         return lista;
     }
 
+    @FXML
+    public void onGuardarEquipamientoclick(ActionEvent event) {
+        try {
+            int idUsuario = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
+            String marca = marcaBicicleta.getText();
+            String modelo = modeloBicicleta.getText();
+            String estado = estadoComboBox.getValue();
+            double peso = pesoSlider.getValue();
+
+            if (marca.isEmpty() || modelo.isEmpty() || estado == null) {
+                mostrarAlerta("Error", "Todos los campos deben estar completos.");
+                return;
+            }
+
+            String sql = "INSERT INTO Bicicleta (usuario, peso, marca, modelo, estado) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                stmt.setInt(1, idUsuario);
+                stmt.setDouble(2, peso);
+                stmt.setString(3, marca);
+                stmt.setString(4, modelo);
+                stmt.setString(5, estado);
+                stmt.executeUpdate();
+            }
+
+            mostrarAlerta("Éxito", "Bicicleta guardada correctamente.");
+            cargarBicicletas();
+            limpiarCampos();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarAlerta("Error SQL", e.getMessage());
+        }
+    }
+
+    private void limpiarCampos() {
+        marcaBicicleta.clear();
+        modeloBicicleta.clear();
+        estadoComboBox.getSelectionModel().clearSelection();
+        pesoSlider.setValue(0);
+    }
+
+    private void mostrarAlerta(String titulo, String contenido) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void onVolverAtrasclick(ActionEvent event) {
+        cambiarPantalla("Inicio.fxml", "Inicio", event);
+    }
+
     private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.setTitle(titulo);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    public void onVolverAtrasclick(ActionEvent event) {
-        cambiarPantalla("Inicio.fxml", "Volver a Inicio", event);
-    }
-
-    @FXML
-    public void onCambioAñadirEquipamiento(ActionEvent actionEvent) {
     }
 }
