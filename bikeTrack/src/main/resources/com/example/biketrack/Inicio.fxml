@@ -25,7 +25,7 @@
             <Image url="@../../../../../../../logo_bikeTrack.png" />
          </image>
       </ImageView>
-      <Button fx:id="cerrarSesionButton" layoutX="487.0" layoutY="361.0" mnemonicParsing="false" text="Cerrar sesion" />
-      <Button fx:id="verRutasButon" layoutX="337.0" layoutY="361.0" mnemonicParsing="false" text="Ver rutas" />
+      <Button fx:id="cerrarSesionButton" layoutX="487.0" layoutY="361.0" mnemonicParsing="false" onAction="#onCerrarSesionclick" text="Cerrar sesion" />
+      <Button fx:id="verRutasButon" layoutX="337.0" layoutY="361.0" mnemonicParsing="false" onAction="#onVerRutaclick" text="Ver rutas" />
    </children>
 </Pane>

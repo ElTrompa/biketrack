@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,29 +16,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RutaNuevaManualController {
-    @javafx.fxml.FXML
+    @FXML
     private TextField kilometros;
-    @javafx.fxml.FXML
+    @FXML
     private TextField desnivel;
-    @javafx.fxml.FXML
+    @FXML
     private Label nombreUsuario;
-    @javafx.fxml.FXML
+    @FXML
     private Button volverAtrasButon;
-    @javafx.fxml.FXML
-    private ComboBox comboBoxBicicleta;
+    @FXML
+    private ComboBox<Bicicleta> comboBoxBicicleta;
     @FXML
     private TextField nombreRuta;
     @FXML
-    private ComboBox comboSegundos;
+    private ComboBox<Integer> comboSegundos;
     @FXML
-    private ComboBox comboHoras;
+    private ComboBox<Integer> comboHoras;
     @FXML
-    private ComboBox comboMinutos;
+    private ComboBox<Integer> comboMinutos;
 
     @FXML
     public void initialize() {
         nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
-        cargarBicicletas(); // <--- Esta línea es necesaria
+        cargarBicicletas();
         cargarCombosTiempo();
     }
 
@@ -60,24 +61,23 @@ public class RutaNuevaManualController {
     private void cargarBicicletas() {
         int idUsuarioActual = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
 
-        try (Connection conn = DBUtil.getConexion()) {
-            int query = Integer.parseInt("SELECT * FROM Bicicleta WHERE usuario = ?");
-            PreparedStatement stmt = conn.prepareStatement(String.valueOf(query));
+        Connection conn = DBUtil.getConexion();
+        String sql = "SELECT * FROM Bicicleta WHERE usuario = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idUsuarioActual);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Bicicleta bici = new Bicicleta(
-                        rs.getInt("equipo"),
-                        rs.getInt("usuario"),
-                        rs.getDouble("peso"),
-                        rs.getString("marca"),
-                        rs.getString("modelo"),
-                        rs.getString("estado")
-                );
-                comboBoxBicicleta.getItems().add(bici);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Bicicleta bici = new Bicicleta(
+                            rs.getInt("equipo"),
+                            rs.getInt("usuario"),
+                            rs.getDouble("peso"),
+                            rs.getString("marca"),
+                            rs.getString("modelo"),
+                            rs.getString("estado")
+                    );
+                    comboBoxBicicleta.getItems().add(bici);
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,14 +93,28 @@ public class RutaNuevaManualController {
         int idUsuarioActual = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
 
         String nombre = nombreRuta.getText();
-        int desnivelInsertado = Integer.parseInt(desnivel.getText());
-        double kilometrosInsertados = Double.parseDouble(kilometros.getText());
+        if (nombre.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "⚠ El nombre de la ruta no puede estar vacío.").showAndWait();
+            return;
+        }
+
+        int desnivelInsertado;
+        double kilometrosInsertados;
+
+        try {
+            desnivelInsertado = Integer.parseInt(desnivel.getText());
+            kilometrosInsertados = Double.parseDouble(kilometros.getText());
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.WARNING, "⚠ Kilómetros y desnivel deben ser números válidos.").showAndWait();
+            return;
+        }
+
         String dificultad = "media";
         String ubicacion = "desconocida";
 
-        Integer horas = (Integer) comboHoras.getValue();
-        Integer minutos = (Integer) comboMinutos.getValue();
-        Integer segundos = (Integer) comboSegundos.getValue();
+        Integer horas = comboHoras.getValue();
+        Integer minutos = comboMinutos.getValue();
+        Integer segundos = comboSegundos.getValue();
 
         if (horas == null || minutos == null || segundos == null) {
             new Alert(Alert.AlertType.WARNING, "⚠ Debes seleccionar horas, minutos y segundos.").showAndWait();
@@ -109,12 +123,18 @@ public class RutaNuevaManualController {
 
         String tiempoStr = String.format("%02d:%02d:%02d", horas, minutos, segundos);
         double tiempoHoras = horas + minutos / 60.0 + segundos / 3600.0;
+        if (tiempoHoras == 0) {
+            new Alert(Alert.AlertType.WARNING, "⚠ El tiempo no puede ser cero.").showAndWait();
+            return;
+        }
 
         double velocidadMedia = kilometrosInsertados / tiempoHoras;
 
-        try (Connection conn = DBUtil.getConexion()) {
-            String sql = "INSERT INTO Rutas (nombre, desnivel, usuario, distancia, dificultad, ubicacion, tiempo, velocidadMedia) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        Connection conn = DBUtil.getConexion();
+        String sql = "INSERT INTO Rutas (nombre, desnivel, usuario, distancia, dificultad, ubicacion, tiempo, velocidadMedia) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, nombre);
             stmt.setInt(2, desnivelInsertado);
             stmt.setInt(3, idUsuarioActual);
@@ -127,6 +147,7 @@ public class RutaNuevaManualController {
             stmt.executeUpdate();
             new Alert(Alert.AlertType.CONFIRMATION, "✅ Ruta guardada correctamente.").showAndWait();
 
+            // Limpiar campos
             nombreRuta.clear();
             kilometros.clear();
             desnivel.clear();
@@ -134,8 +155,10 @@ public class RutaNuevaManualController {
             comboMinutos.setValue(null);
             comboSegundos.setValue(null);
             comboBoxBicicleta.setValue(null);
+
         } catch (SQLException e) {
             e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "❌ Error al guardar la ruta en la base de datos.").showAndWait();
         }
     }
 
@@ -148,6 +171,7 @@ public class RutaNuevaManualController {
     }
 
     @FXML
-    public void onSubirRutaclick(ActionEvent actionEvent) {
+    public void onSubirRutaclick(ActionEvent event) {
+        guardarRuta();
     }
 }

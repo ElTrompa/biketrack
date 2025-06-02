@@ -41,7 +41,6 @@ CREATE TABLE IF NOT EXISTS Rutas (
     FOREIGN KEY (usuario) REFERENCES Usuario(usuario) ON DELETE CASCADE
 );
 
--- Nueva tabla para almacenar archivos GPX relacionados con rutas y bicicletas
 CREATE TABLE IF NOT EXISTS GPXArchivo (
     id INT AUTO_INCREMENT PRIMARY KEY,
     ruta INT,
