@@ -37,6 +37,7 @@ public class ProgresoController {
         nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
         configurarGrafica();
         cargarGrafica();
+        cargarEstadisticas();
     }
 
     private void configurarGrafica() {
