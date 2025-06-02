@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0A285A;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.VerRutaSelecionadaController">
+<Pane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.biketrack.VerRutaSelecionadaController" prefWidth="600.0" prefHeight="400.0" style="-fx-background-color: #0A285A;">
    <children>
       <Button layoutX="507.0" layoutY="361.0" mnemonicParsing="false" onAction="#onVolverAtrasclick" text="Volver atras" />
       <Label fx:id="nombreUsuario" layoutX="14.0" layoutY="14.0" textFill="WHITE" />
@@ -13,7 +13,18 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Pane fx:id="mapPane" layoutX="10.0" layoutY="197.0" prefHeight="193.0" prefWidth="291.0" style="-fx-background-color: white; -fx-border-color: black;" />
-      <Label fx:id="infoLabel" layoutX="10.0" layoutY="260.0" prefWidth="280.0" textFill="WHITE" wrapText="true" />
+      <Pane fx:id="mapPane" layoutX="10.0" layoutY="60.0" prefHeight="300.0" prefWidth="290.0"
+            style="-fx-background-color: white; -fx-border-color: black;" />
+      <VBox layoutX="320.0" layoutY="60.0" spacing="10.0" prefWidth="260.0">
+         <Label text="Estadísticas de la Ruta" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+         </Label>
+         <Label fx:id="infoLabel" textFill="WHITE" wrapText="true" />
+         <Label text="Bicicleta utilizada:" textFill="WHITE"/>
+         <Label fx:id="bicicletaLabel" textFill="WHITE" />
+      </VBox>
    </children>
 </Pane>
+

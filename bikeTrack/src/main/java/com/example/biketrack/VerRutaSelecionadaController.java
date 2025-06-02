@@ -60,26 +60,39 @@ public class VerRutaSelecionadaController {
     }
 
     private File obtenerArchivoGPXDesdeBD(int rutaId) throws Exception {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/BikeTrackDB", "root", "tu_password");
         String sql = "SELECT archivo FROM GPXArchivo WHERE ruta = ? ORDER BY fecha_subida DESC LIMIT 1";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, rutaId);
 
-        ResultSet rs = stmt.executeQuery();
-        if (rs.next()) {
-            byte[] gpxBytes = rs.getBytes("archivo");
-            File tempFile = File.createTempFile("ruta", ".gpx");
-            try (FileOutputStream fos = new FileOutputStream(tempFile)) {
-                fos.write(gpxBytes);
-            }
-            return tempFile;
+        Connection conn = DBUtil.getConexion();
+        if (conn == null || conn.isClosed()) {
+            throw new SQLException("No se pudo obtener conexión válida a la base de datos");
         }
 
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, rutaId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    byte[] gpxBytes = rs.getBytes("archivo");
+
+                    if (gpxBytes == null || gpxBytes.length == 0) {
+                        return null;
+                    }
+
+                    File tempFile = File.createTempFile("ruta", ".gpx");
+                    tempFile.deleteOnExit();
+
+                    try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+                        fos.write(gpxBytes);
+                    }
+
+                    return tempFile;
+                }
+            }
+        }
         return null;
     }
 
     private List<GpxVisualizer.Punto> GpxVisualizerExtraerPuntos(File archivoGPX) throws Exception {
-        // Versión parcial del método procesarGPX para solo extraer los puntos
         List<GpxVisualizer.Punto> puntos = new java.util.ArrayList<>();
 
         javax.xml.parsers.DocumentBuilder builder = javax.xml.parsers.DocumentBuilderFactory.newInstance().newDocumentBuilder();

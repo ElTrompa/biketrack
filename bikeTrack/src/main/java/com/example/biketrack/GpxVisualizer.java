@@ -38,6 +38,8 @@ public class GpxVisualizer {
     // VISUALIZADOR (opcional)
     // ========================
     public static void visualizarGPX(List<Punto> puntos, Pane pane, double width, double height) {
+        if (puntos == null || puntos.size() < 2) return;
+
         for (int i = 1; i < puntos.size(); i++) {
             double[] p1 = mapLatLonToXY(puntos, puntos.get(i - 1).lat, puntos.get(i - 1).lon, width, height);
             double[] p2 = mapLatLonToXY(puntos, puntos.get(i).lat, puntos.get(i).lon, width, height);
@@ -61,8 +63,14 @@ public class GpxVisualizer {
         double minLon = puntos.stream().mapToDouble(p -> p.lon).min().orElse(lon);
         double maxLon = puntos.stream().mapToDouble(p -> p.lon).max().orElse(lon);
 
-        double xNorm = (lon - minLon) / (maxLon - minLon);
-        double yNorm = 1 - ((lat - minLat) / (maxLat - minLat)); // invertido
+        // Evitar división por cero cuando todos los valores son iguales
+        double lonRange = maxLon - minLon;
+        double latRange = maxLat - minLat;
+        if (lonRange == 0) lonRange = 1;
+        if (latRange == 0) latRange = 1;
+
+        double xNorm = (lon - minLon) / lonRange;
+        double yNorm = 1 - ((lat - minLat) / latRange); // invertido
 
         double x = xNorm * width;
         double y = yNorm * height;
@@ -94,10 +102,18 @@ public class GpxVisualizer {
                 Node nodo = hijos.item(j);
                 if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                     Element el = (Element) nodo;
-                    if (el.getTagName().equals("ele")) {
-                        ele = Double.parseDouble(el.getTextContent());
-                    } else if (el.getTagName().equals("time")) {
-                        tiempo = Instant.parse(el.getTextContent());
+                    if ("ele".equals(el.getTagName())) {
+                        try {
+                            ele = Double.parseDouble(el.getTextContent());
+                        } catch (NumberFormatException ex) {
+                            ele = 0; // valor por defecto si no puede parsear
+                        }
+                    } else if ("time".equals(el.getTagName())) {
+                        try {
+                            tiempo = Instant.parse(el.getTextContent());
+                        } catch (Exception ex) {
+                            tiempo = null; // ignorar si formato inválido
+                        }
                     }
                 }
             }
@@ -110,6 +126,8 @@ public class GpxVisualizer {
 
     private static Resultados calcularEstadisticas(List<Punto> puntos) {
         Resultados res = new Resultados();
+        if (puntos == null || puntos.size() < 2) return res;
+
         double distancia = 0;
         double desnivel = 0;
 
@@ -131,9 +149,10 @@ public class GpxVisualizer {
             if (i == puntos.size() - 1) fin = p2.tiempo;
         }
 
-        double duracionHoras = inicio != null && fin != null
-                ? Duration.between(inicio, fin).toSeconds() / 3600.0
-                : 0;
+        double duracionHoras = 0;
+        if (inicio != null && fin != null) {
+            duracionHoras = Duration.between(inicio, fin).toSeconds() / 3600.0;
+        }
 
         res.distanciaKm = distancia;
         res.desnivelPositivo = desnivel;
