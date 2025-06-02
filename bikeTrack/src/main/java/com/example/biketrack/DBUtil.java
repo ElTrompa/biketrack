@@ -12,7 +12,7 @@ public class DBUtil {
         if (conexion == null) {
             String cadenaConexion = "jdbc:mysql://localhost:3306/biketrackdb";
             String usuario = "root";
-            String password = "";
+            String password = ""; // tu contraseña aquí
 
             try {
                 DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
