@@ -18,8 +18,13 @@ public class VerRutaSelecionadaController {
 
     @FXML
     private Label infoLabel;
+
+    @FXML
+    private Label bicicletaLabel;
+
     @FXML
     private Pane mapPane;
+
     @FXML
     private Label nombreUsuario;
 
@@ -50,11 +55,22 @@ public class VerRutaSelecionadaController {
                         resultados.duracionHoras,
                         resultados.velocidadMediaKmh
                 ));
+
+                // Mostrar bicicleta utilizada
+                String bicicleta = ruta.getBicicletaUtilizada(); // Asegúrate que este método existe
+                if (bicicleta != null && !bicicleta.isEmpty()) {
+                    bicicletaLabel.setText("Bicicleta utilizada: " + bicicleta);
+                } else {
+                    bicicletaLabel.setText("Bicicleta utilizada: No especificada");
+                }
+
             } else {
                 infoLabel.setText("No se encontró archivo GPX para esta ruta.");
+                bicicletaLabel.setText("Bicicleta utilizada: No disponible");
             }
         } catch (Exception e) {
             infoLabel.setText("Error al cargar ruta: " + e.getMessage());
+            bicicletaLabel.setText("Bicicleta utilizada: Error al obtener");
             e.printStackTrace();
         }
     }
@@ -89,6 +105,7 @@ public class VerRutaSelecionadaController {
                 }
             }
         }
+
         return null;
     }
 

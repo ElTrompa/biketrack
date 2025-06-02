@@ -11,6 +11,7 @@ public class Ruta {
     private String ubicacion;
     private Time tiempo;
     private double velocidadMedia;
+    private String bicicletaUtilizada; // NUEVO campo
 
     public Ruta(int id, String nombre, double distancia, int desnivel, String dificultad, String ubicacion, Time tiempo, double velocidadMedia) {
         this.id = id;
@@ -21,6 +22,12 @@ public class Ruta {
         this.ubicacion = ubicacion;
         this.tiempo = tiempo;
         this.velocidadMedia = velocidadMedia;
+    }
+
+    // Si quieres inicializar también la bicicleta desde el constructor
+    public Ruta(int id, String nombre, double distancia, int desnivel, String dificultad, String ubicacion, Time tiempo, double velocidadMedia, String bicicletaUtilizada) {
+        this(id, nombre, distancia, desnivel, dificultad, ubicacion, tiempo, velocidadMedia);
+        this.bicicletaUtilizada = bicicletaUtilizada;
     }
 
     public int getId() {
@@ -53,6 +60,14 @@ public class Ruta {
 
     public double getVelocidadMedia() {
         return velocidadMedia;
+    }
+
+    public String getBicicletaUtilizada() {
+        return bicicletaUtilizada;
+    }
+
+    public void setBicicletaUtilizada(String bicicletaUtilizada) {
+        this.bicicletaUtilizada = bicicletaUtilizada;
     }
 
     @Override
