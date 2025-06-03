@@ -19,22 +19,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProgresoController {
-    @javafx.fxml.FXML
-    private Label horasTotales;
-    @javafx.fxml.FXML
-    private Label desnivelTotal;
-    @javafx.fxml.FXML
-    private Label actividadesTotales;
-    @javafx.fxml.FXML
-    private Label kilometrosTotales;
-    @javafx.fxml.FXML
-    private Label nombreUsuario;
-    @FXML
-    private BarChart<String, Number> barChart;
+    @FXML private Label horasTotales;
+    @FXML private Label desnivelTotal;
+    @FXML private Label actividadesTotales;
+    @FXML private Label kilometrosTotales;
+    @FXML private Label nombreUsuario;
+    @FXML private BarChart<String, Number> barChart;
 
     @FXML
     public void initialize() {
-        nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
+        if (Usuario.getUsuarioActual() != null) {
+            nombreUsuario.setText(Usuario.getUsuarioActual().getNombre());
+        } else {
+            nombreUsuario.setText("Usuario no encontrado");
+            System.err.println("Usuario actual es null.");
+        }
+
         configurarGrafica();
         cargarGrafica();
         cargarEstadisticas();
@@ -42,27 +42,22 @@ public class ProgresoController {
 
     private void configurarGrafica() {
         barChart.setStyle("-fx-background-color: transparent;");
-
         CategoryAxis xAxis = (CategoryAxis) barChart.getXAxis();
         NumberAxis yAxis = (NumberAxis) barChart.getYAxis();
 
         xAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
         xAxis.setTickLabelRotation(45);
         xAxis.setStyle("-fx-border-color: transparent;");
-
         yAxis.setTickLabelFill(javafx.scene.paint.Color.WHITE);
         yAxis.setMinorTickVisible(false);
         yAxis.setStyle("-fx-border-color: transparent;");
-
         barChart.setLegendVisible(false);
-
         yAxis.setTickMarkVisible(false);
         yAxis.setTickLength(0);
     }
 
     private void cargarGrafica() {
         barChart.getData().clear();
-
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Km recorridos");
 
@@ -71,13 +66,12 @@ public class ProgresoController {
         series.getData().add(new XYChart.Data<>("Marzo", 150));
         series.getData().add(new XYChart.Data<>("Abril", 200));
         series.getData().add(new XYChart.Data<>("Mayo", 180));
-
         barChart.getData().add(series);
 
         for (XYChart.Data<String, Number> data : series.getData()) {
             data.nodeProperty().addListener((obs, oldNode, newNode) -> {
                 if (newNode != null) {
-                    newNode.setStyle("-fx-bar-fill: #00C8FF;"); // azul brillante
+                    newNode.setStyle("-fx-bar-fill: #00C8FF;");
                 }
             });
             if (data.getNode() != null) {
@@ -89,7 +83,14 @@ public class ProgresoController {
     private void cargarEstadisticas() {
         int idUsuarioActual = Integer.parseInt(Usuario.getUsuarioActual().getUsuario());
 
-        try (Connection conn = DBUtil.getConexion()) {
+        Connection conn = DBUtil.getConexion();
+        try {
+            if (conn == null || conn.isClosed()) {
+                System.err.println("Conexión a la base de datos cerrada, intentando reconectar...");
+                DBUtil.cerrarConexion(); // limpia por si acaso
+                conn = DBUtil.getConexion(); // reintenta
+            }
+
             String sql = "SELECT " +
                     "SUM(distancia) AS total_km, " +
                     "SUM(desnivel) AS total_desnivel, " +
@@ -118,22 +119,23 @@ public class ProgresoController {
             }
 
         } catch (SQLException e) {
+            System.err.println("Error al cargar estadísticas desde la base de datos:");
             e.printStackTrace();
         }
     }
+
 
     private void cambiarPantalla(String rutaFXML, String titulo, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(rutaFXML));
             Parent root = loader.load();
-
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             stage.setScene(scene);
             stage.setTitle(titulo);
             stage.show();
         } catch (IOException e) {
+            System.err.println("Error al cambiar de pantalla:");
             e.printStackTrace();
         }
     }
